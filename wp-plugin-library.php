@@ -5,6 +5,10 @@
  * Description: If activated separately, it will load.
  */
 
+if ( class_exists( 'Plugin_Library' ) ) {
+    return;
+}
+
 class Plugin_Library {
 
     public function load() {
@@ -21,10 +25,10 @@ class Plugin_Library {
     }
 }
 
-if ( ! defined( 'Plugin_Library_Loaded' ) ) {
-    add_action( 'init', function(){
+
+add_action( 'init', function(){
+    if ( ! defined( 'Plugin_Library_Loaded' ) ) {
         $plugin = new Plugin_Library();
         $plugin->load();
-         
-    });
-}
+    }
+});
